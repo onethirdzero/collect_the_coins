@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2j5eprqq17pe"]
+[gd_scene load_steps=6 format=3 uid="uid://c2j5eprqq17pe"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_7yasu"]
 [ext_resource type="PackedScene" uid="uid://be5gmpgmk033a" path="res://coin.tscn" id="2_8csy3"]
 [ext_resource type="PackedScene" uid="uid://dhay2kn8qghfd" path="res://player.tscn" id="2_xu3h3"]
+[ext_resource type="PackedScene" uid="uid://by8u6epsm5see" path="res://hud.tscn" id="4_hfim5"]
 
 [sub_resource type="Curve2D" id="Curve2D_0rrfe"]
 _data = {
@@ -39,7 +40,10 @@ curve = SubResource("Curve2D_0rrfe")
 position = Vector2(216, 256)
 rotation = 0.0108691
 
+[node name="HUD" parent="." instance=ExtResource("4_hfim5")]
+
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="timeout" from="CoinTimer" to="." method="_on_coin_timer_timeout"]
 [connection signal="timeout" from="GameTimer" to="." method="game_over"]
+[connection signal="start_game" from="HUD" to="." method="new_game"]

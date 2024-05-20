@@ -9,15 +9,16 @@ func _ready():
 
 func game_over():
 	$CoinTimer.stop()
-	
-	print("GAME OVER")
-	# TODO: Display game over message.
+	$HUD.show_game_over()
 
 
 func new_game():
 	score = 0
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
+	
+	$HUD.update_score(score)
+	$HUD.show_message("Get ready")
 	
 	# TODO: Clear previous coins.
 
