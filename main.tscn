@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2j5eprqq17pe"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_7yasu"]
+[ext_resource type="PackedScene" uid="uid://be5gmpgmk033a" path="res://coin.tscn" id="2_8csy3"]
+[ext_resource type="PackedScene" uid="uid://dhay2kn8qghfd" path="res://player.tscn" id="2_xu3h3"]
+
+[sub_resource type="Curve2D" id="Curve2D_0rrfe"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 216, 256, 0, 0, 0, 0, 952, 264, 0, 0, 0, 0, 968, 864, 0, 0, 0, 0, 208, 864, 0, 0, 0, 0, 216, 256)
+}
+point_count = 5
+
+[node name="Main" type="Node"]
+script = ExtResource("1_7yasu")
+coin_scene = ExtResource("2_8csy3")
+
+[node name="Player" parent="." instance=ExtResource("2_xu3h3")]
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="CoinTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="GameTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(245, 370)
+
+[node name="CoinPath" type="Path2D" parent="."]
+position = Vector2(56.8421, 6.10525)
+scale = Vector2(0.342105, 0.710526)
+curve = SubResource("Curve2D_0rrfe")
+
+[node name="CoinSpawnLocation" type="PathFollow2D" parent="CoinPath"]
+position = Vector2(216, 256)
+rotation = 0.0108691
+
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="timeout" from="CoinTimer" to="." method="_on_coin_timer_timeout"]
+[connection signal="timeout" from="GameTimer" to="." method="game_over"]
