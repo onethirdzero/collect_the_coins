@@ -3,6 +3,11 @@ extends CanvasLayer
 # Notify Main scene that the game has started.
 signal start_game
 
+
+func _ready():
+	$GameTimerLabel.hide()
+
+
 func show_message(text):
 	$Message.text = text
 	$Message.show()
@@ -33,3 +38,6 @@ func _on_start_button_pressed():
 
 func _on_message_timer_timeout():
 	$Message.hide()
+
+func update_game_timer(time_left):
+	$GameTimerLabel.text = "Time left: %s" % str(int(time_left))

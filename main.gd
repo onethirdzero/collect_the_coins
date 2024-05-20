@@ -21,6 +21,9 @@ func new_game():
 	
 	$HUD.update_score(score)
 	$HUD.show_message("Get ready")
+	$HUD/GameTimerLabel.show()
+	
+	$HUD.update_game_timer($GameTimer.wait_time)
 
 
 func _on_start_timer_timeout():
@@ -29,7 +32,7 @@ func _on_start_timer_timeout():
 
 
 func _on_coin_timer_timeout():
-	print("instantiate coin")
+	print("main: coin instantiated")
 	var coin = coin_scene.instantiate()
 	
 	# Choose a random location on Path2D.
@@ -39,6 +42,8 @@ func _on_coin_timer_timeout():
 	coin.position = coin_spawn_location.position
 	
 	add_child(coin)
+	
+	$HUD.update_game_timer($GameTimer.time_left)
 
 
 func _on_player_hit():
