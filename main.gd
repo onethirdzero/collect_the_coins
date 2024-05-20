@@ -38,3 +38,8 @@ func _on_coin_timer_timeout():
 	coin.position = coin_spawn_location.position
 	
 	add_child(coin)
+
+
+func _on_player_hit():
+	score += 1
+	print("main: score: %d" % score)
