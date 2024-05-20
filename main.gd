@@ -10,6 +10,8 @@ func _ready():
 func game_over():
 	$CoinTimer.stop()
 	$HUD.show_game_over()
+	$Player.hide()
+	get_tree().call_group("coins", "queue_free")
 
 
 func new_game():
@@ -19,8 +21,6 @@ func new_game():
 	
 	$HUD.update_score(score)
 	$HUD.show_message("Get ready")
-	
-	# TODO: Clear previous coins.
 
 
 func _on_start_timer_timeout():

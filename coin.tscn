@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_854ri"]
 size = Vector2(64, 64)
 
-[node name="Coin" type="RigidBody2D"]
+[node name="Coin" type="RigidBody2D" groups=["coins"]]
 gravity_scale = 1.66533e-16
 script = ExtResource("1_1dw6v")
 metadata/_edit_group_ = true
