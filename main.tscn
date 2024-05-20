@@ -25,7 +25,7 @@ one_shot = true
 wait_time = 0.5
 
 [node name="GameTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 30.0
 one_shot = true
 
 [node name="StartPosition" type="Marker2D" parent="."]
