@@ -48,4 +48,4 @@ func _on_coin_timer_timeout():
 
 func _on_player_hit():
 	score += 1
-	print("main: score: %d" % score)
+	$HUD.update_score(score)
