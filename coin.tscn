@@ -1,21 +1,64 @@
-[gd_scene load_steps=4 format=3 uid="uid://be5gmpgmk033a"]
+[gd_scene load_steps=7 format=3 uid="uid://be5gmpgmk033a"]
 
-[ext_resource type="Texture2D" uid="uid://d0ukglbc8lkdj" path="res://icon.svg" id="1_w38et"]
 [ext_resource type="Script" path="res://coin.gd" id="1_1dw6v"]
+[ext_resource type="Texture2D" uid="uid://cbtj2dn6diw4t" path="res://art/coin_gold.png" id="1_bs8xn"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_3mqtc"]
+radius = 4.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_854ri"]
-size = Vector2(64, 64)
+[sub_resource type="Animation" id="Animation_frils"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_vyf00"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k22l7"]
+_data = {
+"RESET": SubResource("Animation_frils"),
+"idle": SubResource("Animation_vyf00")
+}
 
 [node name="Coin" type="RigidBody2D" groups=["coins"]]
 gravity_scale = 1.66533e-16
 script = ExtResource("1_1dw6v")
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_854ri")
+position = Vector2(0, -17)
+scale = Vector2(7, 7)
+shape = SubResource("CircleShape2D_3mqtc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-rotation = 3.14159
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_w38et")
+scale = Vector2(2, 2)
+texture = ExtResource("1_bs8xn")
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_k22l7")
+}
