@@ -7,6 +7,7 @@ var score
 func _ready():
 	pass
 
+
 func game_over():
 	$CoinTimer.stop()
 	$HUD.show_game_over()
@@ -18,11 +19,11 @@ func new_game():
 	score = 0
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
-	
+
 	$HUD.update_score(score)
 	$HUD.show_message("Get ready")
 	$HUD/GameTimerLabel.show()
-	
+
 	$HUD.update_game_timer($GameTimer.wait_time)
 
 
@@ -34,15 +35,15 @@ func _on_start_timer_timeout():
 func _on_coin_timer_timeout():
 	print("main: coin instantiated")
 	var coin = coin_scene.instantiate()
-	
+
 	# Choose a random location on Path2D.
 	var coin_spawn_location = $CoinPath/CoinSpawnLocation
 	coin_spawn_location.progress_ratio = randf()
 
 	coin.position = coin_spawn_location.position
-	
+
 	add_child(coin)
-	
+
 	$HUD.update_game_timer($GameTimer.time_left)
 
 

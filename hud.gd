@@ -21,7 +21,7 @@ func show_game_over():
 	# No need to time out this message because this is the title text.
 	$Message.text = "Collect The Coins"
 	$Message.show()
-	
+
 	# Add a slight delay before showing the start button.
 	await get_tree().create_timer(1.0).timeout
 	$StartButton.show()
@@ -38,6 +38,7 @@ func _on_start_button_pressed():
 
 func _on_message_timer_timeout():
 	$Message.hide()
+
 
 func update_game_timer(time_left):
 	$GameTimerLabel.text = "Time left: %s" % str(int(time_left))
