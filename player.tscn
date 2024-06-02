@@ -1,20 +1,21 @@
 [gd_scene load_steps=4 format=3 uid="uid://dhay2kn8qghfd"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_hha2h"]
-[ext_resource type="Texture2D" uid="uid://d0ukglbc8lkdj" path="res://icon.svg" id="1_jvmc7"]
+[ext_resource type="Texture2D" uid="uid://d4gc548o4nepv" path="res://art/Audi.png" id="2_6byt2"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dqjq4"]
-size = Vector2(111, 112)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2awx0"]
+radius = 44.5
+height = 214.0
 
 [node name="Player" type="Area2D"]
 script = ExtResource("1_hha2h")
-metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 1)
-shape = SubResource("RectangleShape2D_dqjq4")
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CapsuleShape2D_2awx0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_jvmc7")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_6byt2")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

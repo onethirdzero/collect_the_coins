@@ -1,41 +1,49 @@
 extends Area2D
 
-@export var speed = 400
+@export var max_speed = 800
+@export var acceleration = 500 # Units per frame.
+@export var turn_deceleration = 600 # Units per frame.
+@export var rotation_speed = 500
+
+var current_speed = 0
+var moving # Used to signal to this node that a game has started.
 var screen_size
+
 signal hit
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
+	moving = false
 	hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-# TODO: Add self-acceleration.
 func _process(delta):
 	var velocity = Vector2.ZERO
+	if current_speed < max_speed and moving:
+		current_speed += acceleration * delta
+
+	# Change rotation based on input.
 	if Input.is_action_pressed("move_right"):
-		velocity.x = 1
+		global_rotation_degrees += rotation_speed * delta
+		current_speed = max(0, current_speed - turn_deceleration * delta)
 	if Input.is_action_pressed("move_left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("move_up"):
-		velocity.y -= 1
-	if Input.is_action_pressed("move_down"):
-		velocity.y += 1
-	
-	if velocity.length() > 0:
-		# If more than 1 input direction is detected, the resulting
-		# vector has a higher speed than when only 1 input is detected.
-		# Avoid this by normalizing the resulting vector.
-		velocity = velocity.normalized() * speed
+		global_rotation_degrees -= rotation_speed * delta
+		current_speed = max(0, current_speed - turn_deceleration * delta)
+
+	velocity = Vector2(0, -1).rotated(global_rotation) * current_speed
 
 	position += velocity * delta
-	
+
 	# Prevent player from moving off screen.
 	position = position.clamp(Vector2.ZERO, screen_size)
+
 
 func start(pos):
 	position = pos
 	show()
+	moving = true
+	current_speed = 0
 
 
 func _on_body_entered(body):
