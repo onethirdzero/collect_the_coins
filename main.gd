@@ -33,7 +33,6 @@ func _on_start_timer_timeout():
 
 
 func _on_coin_timer_timeout():
-	print("main: coin instantiated")
 	var coin = coin_scene.instantiate()
 
 	# Choose a random location on Path2D.
@@ -41,8 +40,9 @@ func _on_coin_timer_timeout():
 	coin_spawn_location.progress_ratio = randf()
 
 	coin.position = coin_spawn_location.position
+	print("main: coin instantiated: %v" % coin.position)
 
-	add_child(coin)
+	$CoinPath.add_child(coin)
 
 	$HUD.update_game_timer($GameTimer.time_left)
 

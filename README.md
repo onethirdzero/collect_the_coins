@@ -9,8 +9,8 @@ Collect as many coins as you can before the timer runs out!
 ## TODOs/nice to have
 
 - [ ] Host this somewhere so others can play.
-- [ ] Coins don't seem to spawn reliably on every CoinTimer timeout.
-- [ ] Coin spawn path seems to move with player position.
+- [x] Coins don't seem to spawn reliably on every CoinTimer timeout.
+- [x] Coin spawn path seems to move with player position.
 - [x] Nicer art assets. I just used whatever was available from the tutorial.
 - [ ] Add audio.
 - [x] Add auto-acceleration to player object, so that player has to steer.
